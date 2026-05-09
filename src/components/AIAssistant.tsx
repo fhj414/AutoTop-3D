@@ -6,6 +6,7 @@ import { Bot, Send, X } from "lucide-react";
 interface Message {
   role: "user" | "assistant";
   content: string;
+  factors?: string[];
 }
 
 export function AIAssistant() {
@@ -25,8 +26,9 @@ export function AIAssistant() {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ message: userMessage })
     });
-    const data = (await response.json()) as { reply: string };
-    setMessages((items) => [...items, { role: "assistant", content: data.reply }]);
+    const data = (await response.json()) as { reply: string; factors?: string[] };
+    const assistantMessage: Message = { role: "assistant", content: data.reply, factors: data.factors };
+    setMessages((items) => [...items, assistantMessage]);
   }
 
   return (
@@ -47,7 +49,7 @@ export function AIAssistant() {
               </span>
               <div>
                 <p className="font-semibold text-white">AI 购车助手</p>
-                <p className="text-xs text-slate-400">Mock 回复，预留 OpenRouter</p>
+                <p className="text-xs text-slate-400">给出推荐 + 思考摘要</p>
               </div>
             </div>
             <button onClick={() => setOpen(false)} className="grid h-9 w-9 place-items-center rounded-full bg-white/10 text-slate-200 hover:bg-white/15">
@@ -57,7 +59,17 @@ export function AIAssistant() {
           <div className="max-h-96 space-y-3 overflow-y-auto p-4">
             {messages.map((message, index) => (
               <div key={`${message.role}-${index}`} className={`rounded-2xl p-3 text-sm leading-6 ${message.role === "user" ? "ml-10 bg-cyan-300 text-slate-950" : "mr-10 bg-white/8 text-slate-100"}`}>
-                {message.content}
+                {message.factors && message.factors.length > 0 && (
+                  <details className="mb-2 rounded-xl border border-white/10 bg-slate-950/30 px-3 py-2">
+                    <summary className="cursor-pointer select-none text-xs text-slate-300">思考摘要（点击展开）</summary>
+                    <ul className="mt-2 list-disc space-y-1 pl-4 text-xs text-slate-300">
+                      {message.factors.map((item) => (
+                        <li key={item}>{item}</li>
+                      ))}
+                    </ul>
+                  </details>
+                )}
+                <div className="whitespace-pre-line">{message.content}</div>
               </div>
             ))}
           </div>
