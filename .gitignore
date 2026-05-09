@@ -1,0 +1,9 @@
+.next
+node_modules
+out
+dist
+.env
+.env*.local
+*.log
+public/models/*.glb
+!public/models/.gitkeep

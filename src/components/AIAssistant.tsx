@@ -1,0 +1,82 @@
+"use client";
+
+import { useState } from "react";
+import { Bot, Send, X } from "lucide-react";
+
+interface Message {
+  role: "user" | "assistant";
+  content: string;
+}
+
+export function AIAssistant() {
+  const [open, setOpen] = useState(false);
+  const [input, setInput] = useState("");
+  const [messages, setMessages] = useState<Message[]>([
+    { role: "assistant", content: "告诉我预算、城市、用途和是否考虑新能源，我会先用本地规则给你推荐。" }
+  ]);
+
+  async function submit() {
+    if (!input.trim()) return;
+    const userMessage = input.trim();
+    setInput("");
+    setMessages((items) => [...items, { role: "user", content: userMessage }]);
+    const response = await fetch("/api/ai/recommend", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ message: userMessage })
+    });
+    const data = (await response.json()) as { reply: string };
+    setMessages((items) => [...items, { role: "assistant", content: data.reply }]);
+  }
+
+  return (
+    <>
+      <button
+        onClick={() => setOpen(true)}
+        className="fixed bottom-5 right-5 z-50 flex items-center gap-2 rounded-full bg-cyan-300 px-5 py-3 text-sm font-semibold text-slate-950 shadow-glow transition hover:bg-cyan-200"
+      >
+        <Bot size={18} />
+        问 AI 帮我选车
+      </button>
+      {open && (
+        <div className="fixed bottom-20 right-4 z-50 w-[calc(100vw-2rem)] max-w-md overflow-hidden rounded-[1.5rem] border border-white/10 bg-slate-950/95 shadow-glow backdrop-blur-xl">
+          <div className="flex items-center justify-between border-b border-white/10 p-4">
+            <div className="flex items-center gap-3">
+              <span className="grid h-10 w-10 place-items-center rounded-full bg-cyan-300 text-slate-950">
+                <Bot size={18} />
+              </span>
+              <div>
+                <p className="font-semibold text-white">AI 购车助手</p>
+                <p className="text-xs text-slate-400">Mock 回复，预留 OpenRouter</p>
+              </div>
+            </div>
+            <button onClick={() => setOpen(false)} className="grid h-9 w-9 place-items-center rounded-full bg-white/10 text-slate-200 hover:bg-white/15">
+              <X size={17} />
+            </button>
+          </div>
+          <div className="max-h-96 space-y-3 overflow-y-auto p-4">
+            {messages.map((message, index) => (
+              <div key={`${message.role}-${index}`} className={`rounded-2xl p-3 text-sm leading-6 ${message.role === "user" ? "ml-10 bg-cyan-300 text-slate-950" : "mr-10 bg-white/8 text-slate-100"}`}>
+                {message.content}
+              </div>
+            ))}
+          </div>
+          <div className="flex gap-2 border-t border-white/10 p-3">
+            <input
+              value={input}
+              onChange={(event) => setInput(event.target.value)}
+              onKeyDown={(event) => {
+                if (event.key === "Enter") void submit();
+              }}
+              placeholder="例如：25万，上海，家用，想买新能源"
+              className="min-w-0 flex-1 rounded-full border border-white/10 bg-white/8 px-4 py-2 text-sm text-white outline-none placeholder:text-slate-500"
+            />
+            <button onClick={() => void submit()} className="grid h-10 w-10 place-items-center rounded-full bg-cyan-300 text-slate-950">
+              <Send size={16} />
+            </button>
+          </div>
+        </div>
+      )}
+    </>
+  );
+}
