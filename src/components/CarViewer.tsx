@@ -2,7 +2,7 @@
 
 import { Component, Suspense, useEffect, useMemo, useRef, useState, type ReactNode } from "react";
 import { Canvas, useThree } from "@react-three/fiber";
-import { ContactShadows, Environment, OrbitControls, PerspectiveCamera, useGLTF } from "@react-three/drei";
+import { ContactShadows, OrbitControls, PerspectiveCamera, Sky, useGLTF } from "@react-three/drei";
 import { RotateCcw, Sun, Zap } from "lucide-react";
 import * as THREE from "three";
 import type { OrbitControls as OrbitControlsImpl } from "three-stdlib";
@@ -115,6 +115,7 @@ export function CarViewer({ car }: { car: Car }) {
           <color attach="background" args={["#070B16"]} />
           <PerspectiveCamera makeDefault position={[5.2, 3.2, 5.6]} fov={42} />
           <ambientLight intensity={0.72} />
+          <hemisphereLight args={["#BCEBFF", "#0B1022", 0.55]} />
           <directionalLight position={[3, 5, 4]} intensity={2.2} castShadow shadow-mapSize-width={1024} shadow-mapSize-height={1024} />
           <spotLight position={[-4, 4, -2]} intensity={1.2} angle={0.55} penumbra={0.8} color="#8B5CF6" />
           <Suspense fallback={<LowPolyCar color={selectedColor} lightsOn={lightsOn} />}>
@@ -127,7 +128,8 @@ export function CarViewer({ car }: { car: Car }) {
             )}
           </Suspense>
           <ContactShadows position={[0, -0.43, 0]} opacity={0.55} scale={8} blur={2.6} far={4} />
-          <Environment preset="city" />
+          {/* Avoid external HDR fetch (can be blocked in some networks). */}
+          <Sky distance={450000} sunPosition={[1, 0.25, 0.5]} inclination={0.2} azimuth={0.25} />
           <OrbitControls
             ref={controlsRef}
             enableDamping
