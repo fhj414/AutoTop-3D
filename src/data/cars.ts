@@ -27,7 +27,8 @@ export const cars: Car[] = [
     priceRange: "7.98-17.98 万",
     energyType: "PHEV",
     category: "Sedan",
-    coverImage: "/images/cars/byd-qin-plus.svg",
+    coverImage:
+      "https://images.unsplash.com/photo-1542362567-b07e54358753?auto=format&fit=crop&w=1400&q=80",
     modelUrl: "/models/car-placeholder.glb",
     colors,
     specs: { length: 4765, width: 1837, height: 1495, wheelbase: 2718, range: "55-120 km 纯电", power: "插混 1.5L", acceleration: "7.3s" },
@@ -46,7 +47,8 @@ export const cars: Car[] = [
     priceRange: "24.99-35.49 万",
     energyType: "EV",
     category: "SUV",
-    coverImage: "/images/cars/tesla-model-y.svg",
+    coverImage:
+      "https://images.unsplash.com/photo-1552519507-da3b142c6e3d?auto=format&fit=crop&w=1400&q=80",
     modelUrl: "/models/car-placeholder.glb",
     colors,
     specs: { length: 4750, width: 1921, height: 1624, wheelbase: 2890, range: "554-688 km", power: "纯电双电机可选", acceleration: "3.7s" },
@@ -65,7 +67,8 @@ export const cars: Car[] = [
     priceRange: "6.98-8.58 万",
     energyType: "EV",
     category: "Sedan",
-    coverImage: "/images/cars/byd-seagull.svg",
+    coverImage:
+      "https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=1400&q=80",
     modelUrl: "/models/car-placeholder.glb",
     colors,
     specs: { length: 3780, width: 1715, height: 1540, wheelbase: 2500, range: "305-405 km", power: "55 kW", acceleration: "城市灵活取向" },
@@ -84,7 +87,8 @@ export const cars: Car[] = [
     priceRange: "12.98-18.98 万",
     energyType: "PHEV",
     category: "SUV",
-    coverImage: "/images/cars/byd-song-plus.svg",
+    coverImage:
+      "https://images.unsplash.com/photo-1553440569-bcc63803a83d?auto=format&fit=crop&w=1400&q=80",
     modelUrl: "/models/car-placeholder.glb",
     colors,
     specs: { length: 4775, width: 1890, height: 1670, wheelbase: 2765, range: "71-150 km 纯电", power: "插混 / 纯电", acceleration: "8.3s" },
@@ -103,7 +107,8 @@ export const cars: Car[] = [
     priceRange: "24.98-32.98 万",
     energyType: "EREV",
     category: "SUV",
-    coverImage: "/images/cars/aito-m7.svg",
+    coverImage:
+      "https://images.unsplash.com/photo-1525609004556-c46c7d6cf023?auto=format&fit=crop&w=1400&q=80",
     modelUrl: "/models/car-placeholder.glb",
     colors,
     specs: { length: 5020, width: 1945, height: 1775, wheelbase: 2820, range: "综合 1200+ km", power: "增程式", acceleration: "4.8s" },
@@ -122,7 +127,8 @@ export const cars: Car[] = [
     priceRange: "24.98-27.98 万",
     energyType: "EREV",
     category: "SUV",
-    coverImage: "/images/cars/li-l6.svg",
+    coverImage:
+      "https://images.unsplash.com/photo-1618843479313-40f8afb4b4d8?auto=format&fit=crop&w=1400&q=80",
     modelUrl: "/models/car-placeholder.glb",
     colors,
     specs: { length: 4925, width: 1960, height: 1735, wheelbase: 2920, range: "综合 1390 km", power: "双电机增程", acceleration: "5.4s" },
@@ -141,7 +147,8 @@ export const cars: Car[] = [
     priceRange: "21.59-29.99 万",
     energyType: "EV",
     category: "Sedan",
-    coverImage: "/images/cars/xiaomi-su7.svg",
+    coverImage:
+      "https://images.unsplash.com/photo-1550355291-bbee04a92027?auto=format&fit=crop&w=1400&q=80",
     modelUrl: "/models/car-placeholder.glb",
     colors,
     specs: { length: 4997, width: 1963, height: 1455, wheelbase: 3000, range: "700-830 km", power: "220-495 kW", acceleration: "2.78s" },
@@ -160,7 +167,8 @@ export const cars: Car[] = [
     priceRange: "8.00-15.19 万",
     energyType: "ICE",
     category: "Sedan",
-    coverImage: "/images/cars/vw-lavida.svg",
+    coverImage:
+      "https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?auto=format&fit=crop&w=1400&q=80",
     modelUrl: "/models/car-placeholder.glb",
     colors,
     specs: { length: 4678, width: 1806, height: 1474, wheelbase: 2688, range: "油耗 5.4-5.9 L/100km", power: "1.5L / 1.5T", acceleration: "家用舒适取向" },
@@ -179,7 +187,8 @@ export const cars: Car[] = [
     priceRange: "8.58-17.49 万",
     energyType: "ICE",
     category: "Sedan",
-    coverImage: "/images/cars/nissan-sylphy.svg",
+    coverImage:
+      "https://images.unsplash.com/photo-1507136566006-cfc505b114fc?auto=format&fit=crop&w=1400&q=80",
     modelUrl: "/models/car-placeholder.glb",
     colors,
     specs: { length: 4652, width: 1815, height: 1450, wheelbase: 2712, range: "油耗 4.9-6.1 L/100km", power: "1.6L / e-POWER", acceleration: "舒适省油取向" },
@@ -198,7 +207,8 @@ export const cars: Car[] = [
     priceRange: "10.58-18.48 万",
     energyType: "ICE",
     category: "SUV",
-    coverImage: "/images/cars/toyota-frontlander.svg",
+    coverImage:
+      "https://images.unsplash.com/photo-1502877338535-766e1452684a?auto=format&fit=crop&w=1400&q=80",
     modelUrl: "/models/car-placeholder.glb",
     colors,
     specs: { length: 4485, width: 1825, height: 1620, wheelbase: 2640, range: "油耗 5.1-6.2 L/100km", power: "2.0L / 双擎", acceleration: "经济耐用取向" },
