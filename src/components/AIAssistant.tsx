@@ -12,23 +12,50 @@ interface Message {
 export function AIAssistant() {
   const [open, setOpen] = useState(false);
   const [input, setInput] = useState("");
+  const [thinking, setThinking] = useState(false);
   const [messages, setMessages] = useState<Message[]>([
     { role: "assistant", content: "告诉我预算、城市、用途和是否考虑新能源，我会先用本地规则给你推荐。" }
   ]);
 
   async function submit() {
+    if (thinking) return;
     if (!input.trim()) return;
     const userMessage = input.trim();
     setInput("");
-    setMessages((items) => [...items, { role: "user", content: userMessage }]);
-    const response = await fetch("/api/ai/recommend", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ message: userMessage })
-    });
-    const data = (await response.json()) as { reply: string; factors?: string[] };
-    const assistantMessage: Message = { role: "assistant", content: data.reply, factors: data.factors };
-    setMessages((items) => [...items, assistantMessage]);
+    setThinking(true);
+    setMessages((items) => [...items, { role: "user", content: userMessage }, { role: "assistant", content: "思考中…" }]);
+
+    try {
+      const response = await fetch("/api/ai/recommend", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ message: userMessage })
+      });
+      const data = (await response.json()) as { reply: string; factors?: string[] };
+      const assistantMessage: Message = { role: "assistant", content: data.reply, factors: data.factors };
+      setMessages((items) => {
+        const copy = [...items];
+        const lastAssistantIndex = copy.map((m) => m.role).lastIndexOf("assistant");
+        if (lastAssistantIndex >= 0 && copy[lastAssistantIndex]?.content === "思考中…") {
+          copy[lastAssistantIndex] = assistantMessage;
+          return copy;
+        }
+        return [...copy, assistantMessage];
+      });
+    } catch {
+      setMessages((items) => {
+        const copy = [...items];
+        const lastAssistantIndex = copy.map((m) => m.role).lastIndexOf("assistant");
+        const errorMessage: Message = { role: "assistant", content: "刚刚请求失败了。请检查网络后重试，或稍后再试。" };
+        if (lastAssistantIndex >= 0 && copy[lastAssistantIndex]?.content === "思考中…") {
+          copy[lastAssistantIndex] = errorMessage;
+          return copy;
+        }
+        return [...copy, errorMessage];
+      });
+    } finally {
+      setThinking(false);
+    }
   }
 
   return (
@@ -80,10 +107,15 @@ export function AIAssistant() {
               onKeyDown={(event) => {
                 if (event.key === "Enter") void submit();
               }}
+              disabled={thinking}
               placeholder="例如：25万，上海，家用，想买新能源"
-              className="min-w-0 flex-1 rounded-full border border-white/10 bg-white/8 px-4 py-2 text-sm text-white outline-none placeholder:text-slate-500"
+              className="min-w-0 flex-1 rounded-full border border-white/10 bg-white/8 px-4 py-2 text-sm text-white outline-none placeholder:text-slate-500 disabled:cursor-not-allowed disabled:opacity-60"
             />
-            <button onClick={() => void submit()} className="grid h-10 w-10 place-items-center rounded-full bg-cyan-300 text-slate-950">
+            <button
+              onClick={() => void submit()}
+              disabled={thinking || !input.trim()}
+              className="grid h-10 w-10 place-items-center rounded-full bg-cyan-300 text-slate-950 disabled:cursor-not-allowed disabled:opacity-60"
+            >
               <Send size={16} />
             </button>
           </div>
