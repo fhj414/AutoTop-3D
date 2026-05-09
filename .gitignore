@@ -7,4 +7,3 @@ dist
 *.log
 public/models/*.glb
 !public/models/.gitkeep
-!public/models/car-concept.glb
