@@ -118,13 +118,13 @@ export function CarViewer({ car }: { car: Car }) {
           <hemisphereLight args={["#BCEBFF", "#0B1022", 0.55]} />
           <directionalLight position={[3, 5, 4]} intensity={2.2} castShadow shadow-mapSize-width={1024} shadow-mapSize-height={1024} />
           <spotLight position={[-4, 4, -2]} intensity={1.2} angle={0.55} penumbra={0.8} color="#8B5CF6" />
-          <Suspense fallback={<LowPolyCar color={selectedColor} lightsOn={lightsOn} />}>
+          <Suspense fallback={<LowPolyCar color={selectedColor} lightsOn={lightsOn} category={car.category} specs={car.specs} />}>
             {shouldLoadModel ? (
-              <ModelErrorBoundary fallback={<LowPolyCar color={selectedColor} lightsOn={lightsOn} />}>
+              <ModelErrorBoundary fallback={<LowPolyCar color={selectedColor} lightsOn={lightsOn} category={car.category} specs={car.specs} />}>
                 <CarModel url={car.modelUrl} color={selectedColor} lightsOn={lightsOn} />
               </ModelErrorBoundary>
             ) : (
-              <LowPolyCar color={selectedColor} lightsOn={lightsOn} />
+              <LowPolyCar color={selectedColor} lightsOn={lightsOn} category={car.category} specs={car.specs} />
             )}
           </Suspense>
           <ContactShadows position={[0, -0.43, 0]} opacity={0.55} scale={8} blur={2.6} far={4} />
