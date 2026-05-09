@@ -89,6 +89,10 @@ src/lib/carDataProvider.ts
 项目已支持通过环境变量 `CAR_DATA_URL` 从远程 JSON 拉取榜单数据，并在服务端按周缓存（默认 7 天刷新一次）。
 
 - **配置**：在 Vercel 项目环境变量中设置 `CAR_DATA_URL`
+- **你从哪里拿到这个 URL（最简单可用方案）**：
+  - 本项目已内置一个可直接访问的静态文件：`public/data/cars-weekly.json`
+  - 部署到 Vercel 后，它的访问地址就是：`https://<你的域名>/data/cars-weekly.json`
+  - 把 `CAR_DATA_URL` 设成这个地址即可（注意必须是 **完整 URL**，不能写相对路径）
 - **数据格式**（二选一）：
   - 直接返回数组：`Car[]`
   - 或对象：`{ "cars": Car[] }`

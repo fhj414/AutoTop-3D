@@ -1,0 +1,17 @@
+{
+  "updatedAt": "2026-05-09",
+  "source": "manual",
+  "cars": [
+    { "id": "byd-qin-plus", "rank": 1, "monthlySales": 42380, "yoy": "+18.6%", "mom": "+7.2%" },
+    { "id": "tesla-model-y", "rank": 2, "monthlySales": 39260, "yoy": "+9.8%", "mom": "+4.4%" },
+    { "id": "byd-seagull", "rank": 3, "monthlySales": 34890, "yoy": "+31.4%", "mom": "+8.6%" },
+    { "id": "byd-song-plus", "rank": 4, "monthlySales": 32620, "yoy": "+11.2%", "mom": "+3.9%" },
+    { "id": "aito-m7", "rank": 5, "monthlySales": 28940, "yoy": "+42.1%", "mom": "+6.1%" },
+    { "id": "li-l6", "rank": 6, "monthlySales": 26170, "yoy": "新品", "mom": "+12.5%" },
+    { "id": "xiaomi-su7", "rank": 7, "monthlySales": 23640, "yoy": "新品", "mom": "+10.8%" },
+    { "id": "vw-lavida", "rank": 8, "monthlySales": 22480, "yoy": "-3.2%", "mom": "+2.1%" },
+    { "id": "nissan-sylphy", "rank": 9, "monthlySales": 21730, "yoy": "-5.7%", "mom": "+1.8%" },
+    { "id": "toyota-frontlander", "rank": 10, "monthlySales": 19860, "yoy": "+4.6%", "mom": "+3.0%" }
+  ]
+}
+
